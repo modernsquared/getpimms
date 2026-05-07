@@ -44,6 +44,17 @@ export async function proxy(req: NextRequest, event: NextFetchEvent) {
 
   const { domain, path, key, fullKey } = parse(req);
 
+  // Deepseek FIX: Handle container hostname and unrecognized domains EARLY
+  // Container IDs (Docker), internal k8s hostnames, etc. won't have dots
+  // or won't match any known hostnames
+  const knownHostnames = new Set([
+    ...APP_HOSTNAMES,
+    ...API_HOSTNAMES, 
+    ...ADMIN_HOSTNAMES,
+    ...CBE_HOSTNAMES,
+    SHORT_DOMAIN
+  ]);
+
   // for App
   if (APP_HOSTNAMES.has(domain)) {
     return AppMiddleware(req);
