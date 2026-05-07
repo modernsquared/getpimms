@@ -7,6 +7,7 @@ export const HOME_DOMAIN = `https://${process.env.NEXT_PUBLIC_APP_DOMAIN}`;
 
 export const APP_HOSTNAMES = new Set([
   `app.${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
+  `dub.modern2.com`,
   `preview.${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
   `sarfati.ngrok.dev`,
   "localhost:8888",
